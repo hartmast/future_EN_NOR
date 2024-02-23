@@ -138,11 +138,12 @@ oanc$cxn <- ifelse(oanc$Key %in% c("gonna", "going"), "going_to", "will")
 
 # more fine-grained:
 oanc$cxn1 <- case_when(oanc$Key == "will" ~ "will",
+                       oanc$Key == "'ll" ~ "'ll",
           oanc$Key == "shall" ~ "shall",
           oanc$Key == "wo" ~ "won't",
           oanc$Key == "going" ~ "going to",
           oanc$Key == "gonna" ~ "gonna")
-oanc$cxn1 <- factor(oanc$cxn1, levels = c("will", "shall", "won't", "going to", "gonna"))
+oanc$cxn1 <- factor(oanc$cxn1, levels = c("will", "'ll", "shall", "won't", "going to", "gonna"))
 
 # BNC ---------
 
@@ -165,6 +166,18 @@ Omit false hits:
 ```{r}
 bnc  <- bnc %>% filter(keep == "y")
 oanc <- oanc %>% filter(keep=="y")
+```
+
+
+# Summary statistics
+
+Number of hits per corpus:
+
+```{r}
+
+left_join(setNames(as.data.frame(table(bnc$cxn1)), c("Cxn", "BNC")), 
+          setNames(as.data.frame(table(oanc$cxn1)), c("Cxn", "OANC")))
+
 ```
 
 
