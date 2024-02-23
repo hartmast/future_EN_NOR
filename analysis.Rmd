@@ -451,9 +451,9 @@ pvals <- pvals[pvals <.05]
 
 # save as pdf via export pane
 
-dev.off()
+#dev.off()
 # png("tree_en.png", width = 30, height = 10, un = "in", res = 300)
-plot(tree_en)
+# plot(tree_en)
 # dev.off()
 
 # random forest
