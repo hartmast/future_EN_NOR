@@ -608,7 +608,7 @@ boruta02 <- Boruta(Cx ~ Lexeme + Clause_type + if_clause +
 
 # first Boruta model for English
 set.seed(2015)
-boruta_en01 <- Boruta(cxn ~ Negative+Interrogative+if_clause+Clause_type+corpus+Lexeme,
+boruta_en01 <- Boruta(cxn ~ Negative+Interrogative+if_clause+Clause_type+Variety+Lexeme,
                 data = eng1)
 
 
@@ -617,7 +617,7 @@ getConfirmedFormula(boruta_en01)
 plotImpHistory(boruta_en01)
 
 # Boruta model with confirmed formula
-boruta_en02 <- Boruta(cxn ~ Lexeme + corpus + Clause_type + if_clause + Interrogative + Negative,
+boruta_en02 <- Boruta(cxn ~ Lexeme + Variety + Clause_type + if_clause + Interrogative + Negative,
                       data = eng1)
 
 (boruta_EN <- as.data.frame(boruta_en02$ImpHistory) %>% pivot_longer(cols = 1:length(as.data.frame(boruta_en02$ImpHistory))) %>% setNames(c("Variable", "Importance")) %>%
