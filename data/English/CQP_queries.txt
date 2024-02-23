@@ -1,0 +1,42 @@
+cqp -e
+BNC
+set context 50 words
+show +lemma +pos
+set PrintStructures "text_id, text_title, text_n_words, text_n_tokens, text_n_w, text_n_c, text_n_s, text_publication_date, text_text_type, text_context, text_respondent_age, text_respondent_class, text_respondent_sex, text_interaction_type, text_region, text_author_age, text_author_domicile, text_author_sex, text_author_type, text_audience_age, text_domain, text_difficulty, text_medium, text_publication_place, text_sampling_type, text_circulation, text_audience_sex, text_availability, text_mode, text_derived_type, text_genre, u_who"
+[word="will|shall|going|wo|ll|gon"][word="to|n't|na"]? ::match.text_mode="spoken"
+cat Last > "will_shall_going_to_BNC_spoken.txt"
+
+show -lemma -pos
+[word="will|shall|going|wo|ll|gon"][word="to|n't|na"]? ::match.text_mode="spoken"
+cat Last > "will_shall_going_to_BNC_spoken_u_who.txt"
+
+
+# SPOKENBNC2014:
+
+cqp -e
+SPOKENBNC2014
+[word="will|shall|going|wo|'?ll|gon"][word="to|n't|na"]?
+cat Last > "will_shall_going_to_SPOKENBNC2014.txt"
+
+# in addition, for taking priming effects into account:
+
+cqp -e
+SPOKENBNC2014;
+set context 150 words;
+show +u_who;
+set ld "üüü";
+set rd "üüü";
+[word="will|shall|going|wo|'?ll|gon"][word="to|n't|na"]?;
+cat Last > will_shall_going_to_SPOKENBNC2014_more_context.txt
+
+In the text file, replace üüü by \t.
+
+----------------------------
+
+cqp -e
+OANCSPOKEN
+set context s
+show +lemma +pos
+set PrintStructures "text_id, text_genre, text_file, turn_id, turn_age, turn_sex"
+A = [word="will|shall|going|wo|ll|gon|gonna"][word="to|n't|na"]?
+cat A > "oanc_spoken.txt"
