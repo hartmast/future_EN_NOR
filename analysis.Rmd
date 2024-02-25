@@ -1,6 +1,6 @@
 ---
 title: "Future constructions in English and Norwegian"
-author: "Olaf Mikkelsen & Stefan Hartmann"
+author: "Authors"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
@@ -175,8 +175,15 @@ Number of hits per corpus:
 
 ```{r}
 
+# Norwegian
+
+left_join(setNames(as.data.frame(table(nor_nota$Cx)), c("Cxn", "NoTa")),
+          setNames(as.data.frame(table(nor_bb$Cx)), c("Cxn", "BB")))
+
+# English
 left_join(setNames(as.data.frame(table(bnc$cxn1)), c("Cxn", "BNC")), 
           setNames(as.data.frame(table(oanc$cxn1)), c("Cxn", "OANC")))
+
 
 ```
 
@@ -257,6 +264,10 @@ pvals <- pvals[pvals <.05]
 
 
 ```
+
+For the publication, the plot has been slightly revised using Inkscape to prevent the overlap of the egde running from "negative" to the corresponding bar with the "clause_type" node.
+
+![Conditional inference tree for Norwegian.](figures/ggtree-nor01.png){width=50%}
 
 
 ```{r, eval = FALSE}
